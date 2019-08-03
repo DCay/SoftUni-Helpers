@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Form Field Adding</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container-fluid text-primary">
+    <h1 class="text-center mt-5 ">Create Product</h1>
+    <hr style="height: 2px;" class="bg-primary w-50">
+    <form class="w-50 mx-auto" method="post" action="https://localhost:44363/api/values" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control text-primary" id="name" placeholder="Name..." name="name">
+        </div>s
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control text-primary" id="price" placeholder="Price..." name="price">
+        </div>
+        <hr style="height: 2px;" class="bg-primary">
+        <div id="images">
+            <div class="image-row d-flex justify-content-start">
+                <div class="image-preset rounded mt-1" style="background-image: url('backpack.jpg');">
+                </div>
+                <div class="image-preset rounded mt-1 ml-5" style="background-image: url('device.jpg');">
+                </div>
+                <div class="image rounded mt-1 ml-5">
+                    <input type="file" class="image-upload" name="images">
+                </div>
+            </div>
+        </div>
+        <hr style="height: 2px;" class="bg-primary">
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
