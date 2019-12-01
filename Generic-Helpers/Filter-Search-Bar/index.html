@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Search Bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1 class="text-center mt-3">Filter Search Bar</h1>
+    <div class="md-form active-search w-75 mx-auto mt-4 ">
+        <input class="form-control pb-4 search-bar" type="text" placeholder="Search" aria-label="Search">
+    </div>
+    <ul class="data-elements w-75">
+    </ul>
+</div>
+<script>
+    function display(node) {
+        $(node).show();
+    }
+
+    function hide(node) {
+        $(node).css('display', 'none');
+    }
+
+    function create(node) {
+        return '<li class="data-element mt-1">' +
+            '   <div class="d-flex justify-content-between">' +
+            `       <img src="${node.image}" class="img-thumbnail" width="50" height="50">` +
+            `       <h5 class="ml-3 w-100 mt-3">${node.name}</h5>` +
+            '   </div>' +
+            '</li>'
+    }
+
+    function getData() {
+        return [
+            {name: 'Apple', image: 'https://freepngimg.com/thumb/apple/16-red-apple-png-image.png'},
+            {
+                name: 'Orange',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-orangefruitsorangetasteysweetripefood-981524726779k4sxb.png'
+            },
+            {
+                name: 'Banana',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-bananasbananabananasyellow-bananabotanically-a-berryedible-fruitherbaceousgenus-musa-1701527188945fd4fq.png'
+            },
+            {
+                name: 'Mandarine',
+                image: 'https://purepng.com/public/uploads/thumbnail//purepng.com-tangerinesfruitsorangecitrus-fruitcitrustangerinemandarin-orange-981525184722xqgmz.png'
+            },
+            {
+                name: 'Kiwi',
+                image: 'https://purepng.com/public/uploads/thumbnail//purepng.com-kiwifruitskiwi-9815247237396o1tg.png'
+            },
+            {
+                name: 'Avocado',
+                image: 'https://purepng.com/public/uploads/thumbnail/purepng.com-avocadoavocadoflowering-plantalligator-pearsingle-seedmediterraneanfoodfruit-1701527116137iizt0.png'
+            },
+            {
+                name: 'Blueberry',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-blueberriesblueberriesflowering-plantsindigoberriescyanococcus-17015271207828tsm7.png'
+            },
+            {
+                name: 'Cherry',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-cherriescherrygenus-prunussweet-cherryornamental-cherrycherry-blossomcherries-1701527198250uhqqp.png'
+            },
+            {
+                name: 'Strawberry',
+                image: 'https://purepng.com/public/uploads/thumbnail/purepng.com-strawberrystrawberryfruitfreshpiecestrawberrysfoodfruitywholefull-481521673382xqpem.png'
+            },
+            {
+                name: 'Blackberry',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-blackberryhybridsblackberryrubus-subgenusfoodfruit-1701527189975m4eyw.png'
+            },
+            {
+                name: 'Raspberry',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-raspberryfruitsberryberriesraspberryrasberries-981525182149jqaxs.png'
+            },
+            {
+                name: 'CherryBerry',
+                image: 'https://cdn.imgbin.com/4/21/9/imgbin-cherry-berry-fruit-cherry-blueberry-fruit-material-FHC4F3VuH9pa1xeUVjee7fzzM.jpg'
+            },
+            {
+                name: 'Lemon',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-lemonlemoncitrus-limoyellow-fruitjuicelemonade-1701527236535iw9tf.png'
+            },
+            {
+                name: 'Melon',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-melonmelonfleshy-fruitfruitkind-of-berrypepo-1701527334996i0son.png'
+            },
+            {
+                name: 'Melolemonmelon',
+                image: 'https://i.pinimg.com/originals/3f/e0/43/3fe0434775930b868e0ab8829eda2a7a.png'
+            },
+            {
+                name: 'Firemelon',
+                image: 'https://1eu.funnyjunk.com/thumbnails/comments/But+then+everything+changed+when+the+firemelon+attacked+_d0f052e82d2c30c58d40ef298bff2e60.png'
+            },
+            {
+                name: 'Peach',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-peachpeachjuicy-fruitnectarinefoodfruitpeachescutted-peaches-1701527352312jrkmq.png'
+            },
+            {
+                name: 'Grape',
+                image: 'https://purepng.com/public/uploads/large/purepng.com-red-grapesgrapeberrygrapesfruitfoodred-grapes-1701527227640lqhll.png'
+            }
+        ];
+    }
+
+    function getNodes() {
+        return getData().map(node => {
+            return {
+                'name': node.name,
+                'element': $(create(node))
+            }
+        });
+    }
+
+    function applyFilter() {
+        nodes.forEach(node => hide(node.element));
+
+        let value = $(this).val();
+
+        if (value !== '') {
+            for (const node of nodes) {
+                if (node.name.toLowerCase().includes(value.toLowerCase())) {
+                    display(node.element);
+                }
+            }
+        }
+    }
+
+    let nodes = getNodes();
+
+    nodes.forEach(node => $('.data-elements').append(node.element))
+    nodes.forEach(node => hide(node.element));
+
+    $('.search-bar').on('change keyup paste', applyFilter);
+</script>
+</body>
+</html>
